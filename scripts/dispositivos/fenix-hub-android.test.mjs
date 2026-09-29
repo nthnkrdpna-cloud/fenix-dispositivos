@@ -72,6 +72,9 @@ test("build portátil não depende de secrets de aplicação e mantém versões 
   assert.match(script, /BUILD_TOOLS=.*36\.0\.0/);
   assert.match(script, /JAVA_VERSION=.*17/);
   assert.match(script, /FENIX_ANDROID_CMDLINE_URL/);
+  assert.match(script, /fenix-hub-build-state\.mjs/);
+  const neuralese = await readFile(new URL("../../../scripts/continuidade/neuralese.mjs", import.meta.url), "utf8");
+  assert.match(neuralese, /NEURALESE_VERSAO/);
   assert.match(script, /apksigner/);
   assert.match(script, /zipalign.*-P 16/);
   assert.doesNotMatch(script, /SUPABASE_SERVICE_ROLE_KEY|CLOUDFLARE_API_TOKEN|GEMINI_API_KEY/);
