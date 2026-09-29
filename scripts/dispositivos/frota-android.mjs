@@ -1,0 +1,19 @@
+import {spawn} from "node:child_process";
+import {promises as fs} from "node:fs";
+import path from "node:path";
+
+const SAFE_SETTINGS=[["global","window_animation_scale","0.5"],["global","transition_animation_scale","0.5"],["global","animator_duration_scale","0.5"]];
+
+function run(args){return new Promise((resolve,reject)=>{const p=spawn("adb",args,{stdio:["ignore","pipe","pipe"]});let out="",err="";p.stdout.on("data",d=>out+=d);p.stderr.on("data",d=>err+=d);p.on("error",reject);p.on("close",code=>code===0?resolve(out.trim()):reject(new Error(err.trim()||`adb terminou com ${code}`)));});}
+async function devices(){const raw=await run(["devices"]);return raw.split("\n").slice(1).map(x=>x.trim().split(/\s+/)).filter(x=>x[1]==="device").map(x=>x[0]);}
+async function prop(serial,key){return run(["-s",serial,"shell","getprop",key]).catch(()=> "");}
+async function snapshot(serial){const settings={};for(const [scope,key] of SAFE_SETTINGS)settings[`${scope}.${key}`]=await run(["-s",serial,"shell","settings","get",scope,key]).catch(()=> "unknown");return{protocol:"fenix-android-safe-tuning/1",serial,collected_at:new Date().toISOString(),model:await prop(serial,"ro.product.model"),android:await prop(serial,"ro.build.version.release"),build:await prop(serial,"ro.build.id"),settings};}
+async function apply(serial){const changed=[];for(const [scope,key,value] of SAFE_SETTINGS){const before=await run(["-s",serial,"shell","settings","get",scope,key]);await run(["-s",serial,"shell","settings","put",scope,key,value]);const after=await run(["-s",serial,"shell","settings","get",scope,key]);if(after!==value)throw new Error(`${serial}: alteração não confirmada em ${scope}.${key}`);changed.push({scope,key,before,after});}return changed;}
+async function rollback(serial,changes){for(const x of [...changes].reverse()){if(x.before==="null"||x.before==="unknown")continue;await run(["-s",serial,"shell","settings","put",x.scope,x.key,x.before]);}}
+const mode=process.argv[2]||"discover";const outDir=process.env.FENIX_EVIDENCE_DIR||"./evidencias/dispositivos";
+if(!["discover","optimize","rollback"].includes(mode)){console.error("uso: node scripts/dispositivos/frota-android.mjs discover|optimize|rollback");process.exit(2);}
+const serials=await devices();if(!serials.length)throw new Error("nenhum dispositivo ADB autorizado");await fs.mkdir(outDir,{recursive:true});
+if(mode==="discover"){const nodes=[];for(const serial of serials)nodes.push(await snapshot(serial));const result={protocol:"fenix-android-fleet/1",mode:"read_only",collected_at:new Date().toISOString(),nodes};await fs.writeFile(path.join(outDir,"fleet-manifest.json"),JSON.stringify(result,null,2)+"\n",{mode:0o600});console.log(JSON.stringify(result,null,2));process.exit(0);}
+if(mode==="rollback"){const file=process.env.FENIX_TUNING_SNAPSHOT||path.join(outDir,"fleet-tuning-last.json");const saved=JSON.parse(await fs.readFile(file,"utf8"));for(const node of saved.nodes)for(const [key,value] of Object.entries(node.settings))if(value!=="null"&&value!=="unknown"){const [scope,setting]=key.split(".",2);await run(["-s",node.serial,"shell","settings","put",scope,setting,value]);}console.log(JSON.stringify({ok:true,mode:"rollback",nodes:saved.nodes.length},null,2));process.exit(0);}
+const snapshots=[],results=[];for(const serial of serials){const before=await snapshot(serial);snapshots.push(before);let changed=[];try{changed=await apply(serial);results.push({serial,ok:true,changed});}catch(error){await rollback(serial,changed).catch(()=>{});results.push({serial,ok:false,error:error.message,rolled_back:true});}}
+const record={protocol:"fenix-android-fleet/1",mode:"safe_optimize",collected_at:new Date().toISOString(),nodes:snapshots,results};await fs.writeFile(path.join(outDir,"fleet-tuning-last.json"),JSON.stringify(record,null,2)+"\n",{mode:0o600});console.log(JSON.stringify(record,null,2));if(results.some(x=>!x.ok))process.exit(1);
