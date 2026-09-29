@@ -5,15 +5,16 @@ O Fênix Hub não depende conceitualmente do GitHub Actions para ser compilado. 
 Gradle 9.4.1 e Android SDK API 36/build-tools 36.0.0, executa o contrato estático e
 produz o APK debug com SHA-256, assinatura, alinhamento 16 KiB e badging.
 
-O script não lê nem grava secrets de aplicação. O único parâmetro obrigatório que não é
-fixado no código é `FENIX_ANDROID_CMDLINE_URL`, para que a versão aprovada do pacote
-oficial Android Command Line Tools seja escolhida explicitamente pelo executor.
+O script não lê nem grava secrets de aplicação. O bootstrap padrão agora usa o pacote oficial Android Command Line Tools para Linux
+`commandlinetools-linux-15859902_latest.zip`, publicado pelo Android Developers, com
+SHA-256 `4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583`. O executor
+pode sobrescrever URL e checksum explicitamente, mas não precisa mais fornecer a URL para
+o caminho padrão.
 
 ### Uso
 
 ```bash
-FENIX_ANDROID_CMDLINE_URL='<URL oficial aprovada>' \
-  bash scripts/dispositivos/build-fenix-hub-portable.sh
+bash scripts/dispositivos/build-fenix-hub-portable.sh
 ```
 
 Saída esperada após sucesso:
