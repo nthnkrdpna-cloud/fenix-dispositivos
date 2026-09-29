@@ -77,6 +77,7 @@ yes | sdkmanager --licenses >/dev/null || true
 sdkmanager "platforms;android-$ANDROID_API" "build-tools;$BUILD_TOOLS"
 
 node "$ROOT/scripts/dispositivos/fenix-hub-android.test.mjs"
+node "$ROOT/scripts/dispositivos/fenix-hub-build-state.mjs" "$ANDROID_DIR/app/build/outputs/apk/debug/FENIX_NEURALESE.json"
 cd "$ANDROID_DIR"
 gradle --no-daemon --stacktrace :app:assembleDebug
 
