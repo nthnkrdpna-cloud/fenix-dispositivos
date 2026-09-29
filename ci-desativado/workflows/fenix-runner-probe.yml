@@ -1,0 +1,25 @@
+name: fenix-runner-probe
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fenix-runner-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Runner identity
+        run: |
+          set -eu
+          echo "FENIX_RUNNER_PROBE=1"
+          uname -a
+          node --version
+          java -version
+          test -n "${GITHUB_SHA}"
+          echo "RUNNER_READY=1"
