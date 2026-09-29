@@ -6,6 +6,10 @@ on:
       - 'android/fenix-hub/**'
       - '.github/workflows/fenix-hub-android.yml'
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'android/fenix-hub/**'
+      - '.github/workflows/fenix-hub-android.yml'
 
 permissions:
   contents: read
