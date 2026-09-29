@@ -64,3 +64,15 @@ test("diagnóstico e snapshot precedem qualquer alteração", async () => {
   assert.match(s, /applyCommon/);
   assert.match(s, /rolled_back/);
 });
+
+test("build portátil não depende de secrets de aplicação e mantém versões fixadas", async () => {
+  const script = await readFile(new URL("../../../scripts/dispositivos/build-fenix-hub-portable.sh", import.meta.url), "utf8");
+  assert.match(script, /GRADLE_VERSION=.*9\.4\.1/);
+  assert.match(script, /ANDROID_API=.*36/);
+  assert.match(script, /BUILD_TOOLS=.*36\.0\.0/);
+  assert.match(script, /JAVA_VERSION=.*17/);
+  assert.match(script, /FENIX_ANDROID_CMDLINE_URL/);
+  assert.match(script, /apksigner/);
+  assert.match(script, /zipalign.*-P 16/);
+  assert.doesNotMatch(script, /SUPABASE_SERVICE_ROLE_KEY|CLOUDFLARE_API_TOKEN|GEMINI_API_KEY/);
+});
