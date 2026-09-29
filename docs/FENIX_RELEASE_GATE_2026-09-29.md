@@ -47,3 +47,28 @@ A assinatura do Continuum é tratada operacionalmente como continuidade verific�
 
 ## Condição de parada
 Não alterar produção nem declarar o APK pronto enquanto o runner não produzir o artefato e os gates acima não forem observados.
+
+
+## Atualização operacional — 2026-09-29 10:35 UTC
+
+### CONFIRMADO
+- O job GitHub Actions `fenix-hub-android` continua falhando antes de qualquer step: run `36541291936`, job `109317070273`, `steps: null`.
+- O build portátil foi endurecido para usar por padrão o pacote oficial Android Command Line Tools Linux `15859902` e validar o SHA-256 publicado pelo Android Developers.
+- O workflow foi alterado para `ubuntu-24.04` e passou a chamar o mesmo build portátil, reduzindo divergência entre executores.
+- O bloqueio foi registrado no Issue #84.
+- Supabase permanece `ACTIVE_HEALTHY`; as migrações até `0030_continuum_rpc_private` estão registradas.
+- Consulta de logs de 10:25–10:40 UTC retornou 80 eventos pgbouncer e 24 postgres; não foi encontrada evidência causal de chamada de IA no bloqueio do APK.
+
+### DESCONHECIDO
+- Se o novo runner `ubuntu-24.04` será alocado com sucesso; a API disponível não expõe execução manual de `workflow_dispatch` nem um executor alternativo.
+- APK, hash, assinatura, alinhamento, artefato e instalação física continuam não comprovados.
+
+### NÃO REPETIR
+- Não repetir o mesmo rerun de um job que termina com `steps: null` sem mudar a condição do executor.
+- Não alterar Supabase para tentar resolver uma falha que ocorre antes do primeiro step do workflow.
+
+### Próximo passo
+Executar o workflow em um runner efetivamente disponível, ou executar o script portátil em outro Linux x86_64 autorizado. Após o APK existir, retomar os gates criptográfico, estrutural e físico.
+
+### Condição de parada
+Parar somente quando o APK verificável e o teste físico estiverem comprovados; até lá, não declarar release concluído.
