@@ -60,8 +60,10 @@ SDK_ROOT="$CACHE_DIR/android-sdk"
 CMDLINE_DIR="$SDK_ROOT/cmdline-tools/latest"
 if [[ ! -x "$CMDLINE_DIR/bin/sdkmanager" ]]; then
   SDK_ZIP="$CACHE_DIR/commandlinetools.zip"
-  SDK_URL="${FENIX_ANDROID_CMDLINE_URL:?defina FENIX_ANDROID_CMDLINE_URL com o pacote oficial commandlinetools-linux da versão aprovada}"
+  SDK_URL="${FENIX_ANDROID_CMDLINE_URL:-https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip}"
+  SDK_SHA256="${FENIX_ANDROID_CMDLINE_SHA256:-4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583}"
   curl -fL --retry 3 --retry-all-errors "$SDK_URL" -o "$SDK_ZIP"
+  echo "$SDK_SHA256  $SDK_ZIP" | sha256sum -c -
   rm -rf "$SDK_ROOT/cmdline-tools"
   mkdir -p "$SDK_ROOT/cmdline-tools"
   unzip -q "$SDK_ZIP" -d "$SDK_ROOT/cmdline-tools"
