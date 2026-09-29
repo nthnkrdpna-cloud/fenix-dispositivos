@@ -48,3 +48,14 @@ independentes.
 - Proporção áurea/Fibonacci/geometria sagrada: permanece requisito de especificação
   visual/arquitetural, não uma alegação de validação matemática automática.
 - Nenhum segredo entra no APK, no diário ou no script de build.
+
+
+## Neuralese no build
+
+Cada execução do build portátil gera `FENIX_NEURALESE.json` como sidecar do APK.
+
+O envelope é criado pela camada Neuralese, validado por hash e projetado para o executor com escopo explícito `build`/`verify`. Ele transporta intenção, estado, evidências, restrições, capacidades, incertezas, testes, rollback e condição de parada.
+
+Isso não concede autoridade ao executor e não identifica o provedor. GitHub Actions, Codespace, máquina Linux, outro agente ou executor local podem consumir o mesmo estado. O provedor é apenas metadado.
+
+A perda de uma API, modelo ou CI não invalida o envelope nem a compreensão da tarefa.
