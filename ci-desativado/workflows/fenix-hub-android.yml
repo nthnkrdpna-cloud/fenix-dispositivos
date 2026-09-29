@@ -1,5 +1,6 @@
 name: fenix-hub-android
 
+# CONTINUITY TRIGGER: keep APK build independently executable from the repository.
 on:
   push:
     paths:
