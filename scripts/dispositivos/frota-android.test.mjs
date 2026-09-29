@@ -1,0 +1,3 @@
+import test from "node:test";import assert from "node:assert/strict";import {readFile} from "node:fs/promises";
+test("workflow da frota contém descoberta, snapshot, verificação e rollback",async()=>{const s=await readFile(new URL("./frota-android.mjs",import.meta.url),"utf8");assert.match(s,/fenix-android-fleet\/1/);assert.match(s,/settings.*put/s);assert.match(s,/rollback/);assert.match(s,/fleet-manifest\.json/);assert.match(s,/fleet-tuning-last\.json/);});
+test("diagnóstico G15 permanece somente leitura",async()=>{const s=await readFile(new URL("./g15-diagnostico.mjs",import.meta.url),"utf8");assert.match(s,/modo:"somente_leitura"/);assert.match(s,/getprop/);assert.doesNotMatch(s,/settings.*put/s);});
