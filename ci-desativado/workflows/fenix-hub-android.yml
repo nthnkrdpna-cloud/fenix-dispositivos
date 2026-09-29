@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     defaults:
       run:
@@ -33,24 +33,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: SDK API 36
+      - name: Android SDK and Gradle bootstrap
         run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platforms;android-36" "build-tools;36.0.0"
-
-      - name: Gradle 9.4.1
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '9.4.1'
-
-      - name: Static contract test
-        run: node ../../../scripts/dispositivos/fenix-hub-android.test.mjs
-
-      - name: Build debug APK
-        run: gradle --no-daemon --stacktrace :app:assembleDebug
+          cd ../..
+          FENIX_ANDROID_CMDLINE_URL='https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip' \
+            FENIX_ANDROID_CMDLINE_SHA256='4e4c464f145a7512b57d088ac6c278c03c9eea610886b35a5e0804e74eedf583' \
+            bash scripts/dispositivos/build-fenix-hub-portable.sh
 
       - name: Verify APK
         run: |
