@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface public void termuxCommand(String command) {
-            if(command==null || !command.matches("[a-zA-Z0-9_./ -]{1,200}")) { toast("Comando recusado"); return; }
+            if(command==null || !isAllowedCommand(command)) { toast("Comando Fênix não autorizado"); return; }
             try {
                 Intent i=new Intent("com.termux.RUN_COMMAND");
                 i.setClassName("com.termux","com.termux.app.RunCommandService");
@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
                 i.putExtra("com.termux.RUN_COMMAND_ARGUMENTS",new String[]{"-lc",command});
                 i.putExtra("com.termux.RUN_COMMAND_WORKDIR","/data/data/com.termux/files/home");
                 i.putExtra("com.termux.RUN_COMMAND_BACKGROUND",true);
-                i.putExtra("com.termux.RUN_COMMAND_COMMAND_LABEL","Fênix Hub");
+                i.putExtra("com.termux.RUN_COMMAND_LABEL","Fênix Hub");
                 startService(i);
                 toast("Comando enviado ao Termux");
             } catch(Exception e) { toast("Termux não está autorizado: "+e.getClass().getSimpleName()); }
@@ -85,6 +85,15 @@ public class MainActivity extends Activity {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         }
 
-        private void toast(String s){ runOnUiThread(()->Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show()); }
+        private boolean isAllowedCommand(String command) {
+    return command.equals("node scripts/fenix.mjs status")
+        || command.equals("node scripts/fenix.mjs fleet discover")
+        || command.equals("node scripts/fenix.mjs fleet optimize")
+        || command.equals("node scripts/fenix.mjs fleet rollback")
+        || command.equals("node scripts/fenix.mjs network discover")
+        || command.startsWith("node scripts/fenix.mjs vault harvest ")
+        || command.equals("node scripts/fenix.mjs quota status");
+}
+private void toast(String s){ runOnUiThread(()->Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show()); }
     }
 }
