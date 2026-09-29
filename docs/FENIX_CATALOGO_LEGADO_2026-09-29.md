@@ -362,3 +362,18 @@ Cada candidato deverá receber:
 - condição de rollback.
 
 Somente candidatos que passem essa ficha poderão entrar na arquitetura Fênix.
+
+
+## 13. Cobertura histórica indexada nesta revisão
+
+A busca de commits do GitHub retornou:
+- sistema2: 95 commits indexados, 94 mensagens únicas, 04/09–28/09.
+- TERCEIRA-MARGEM: 88 commits, 78 mensagens únicas, 06/09–28/09.
+- AMANDABT: 71 commits, 71 mensagens únicas, 06/09–28/09.
+- zettelkasten-ai: 46 commits, 43 mensagens únicas, 08/09–28/09.
+- hub: 100 commits retornados pelo limite da consulta, todos entre 27/09–29/09; portanto a cobertura do hub é truncada pelo limite de 100 e não representa todo o histórico.
+- Prototype-TM01: 4 commits, 18/09.
+- APKs: 18 commits, 27/09–29/09.
+- codespace-android-termux: 1 commit, 29/09.
+
+A cobertura é suficiente para localizar a evolução recente e os marcos, mas não deve ser descrita como exportação integral do Git. Para preservação total, a próxima etapa é gerar um inventário de commits por repositório fora do limite de pesquisa e guardar os identificadores em artefato portátil.
