@@ -303,3 +303,62 @@ A catalogação só passa para reciclagem quando:
 - recursos reutilizáveis estiverem separados de dados pessoais/segredos;
 - gaps de evidência estiverem explícitos;
 - nenhum item histórico estiver sendo tratado como estado atual sem evidência.
+
+
+## 9. Branches relevantes observadas
+
+O inventário de branches também faz parte do legado. Branch não é prova de código vigente; é fonte de histórico e possíveis implementações.
+
+- hub: dezenas de branches, incluindo continuidade, identidade, provider-agnostic, persistência, RPC hardening, UI, TV, APK/admin, rede e Termux.
+- APKs: branches de ingestão, biblioteca, geração Life in Adventure e experiência da Amanda.
+- TERCEIRA-MARGEM: branches de forja, pareamento, pesquisa, linhagens, protocolo Fênix e memória/cifras.
+- sistema2: branches de planejamento, migração, regra da caixa, revisão/reconstrução e protocolo Fênix.
+- zettelkasten-ai: branches de frota, Sandman, áudio, credencial e inbox.
+- AMANDABT: branches de visão da Amanda, sigilos, caixa, mapa/intensivão e protocolo Fênix.
+
+A lista completa de nomes estava disponível no GitHub durante esta catalogação e deve ser preservada como inventário antes de eventual limpeza.
+
+## 10. Workflows observados
+
+### hub
+- `.github/workflows/fenix-continuum.yml`
+- `.github/workflows/fenix-continuum-main.yml`
+- `.github/workflows/supabase-deploy.yml`
+- `.github/workflows/supabase-previa.yml`
+- `.github/workflows/cloudflare-secrets.yml`
+- `.github/workflows/tv-atualizar.yml`
+
+### APKs
+- `.github/workflows/fenix-life-in-adventure-build.yml`
+- `.github/workflows/biblioteca-aplicativos.yml`
+
+Nos demais repositórios, a busca textual por `.github/workflows` não produziu uma listagem confiável de arquivos de workflow; portanto isso permanece DESCONHECIDO até inspeção por árvore/histórico.
+
+## 11. Marcos iniciais e atuais
+
+- sistema2: primeiro commit encontrado pelo índice consultado em 16/09/2026; snapshot atual 11c5211 em 28/09.
+- TERCEIRA-MARGEM: primeiro commit indexado em 17/09/2026; snapshot atual 52efe4e em 28/09.
+- AMANDABT: primeiro commit indexado em 16/09/2026; snapshot atual 41eb64a em 28/09.
+- hub: primeiro commit indexado em 24/09/2026; snapshot atual 5679ccf em 29/09.
+- codespace-android-termux: primeiro e único commit observado, 619ea6c7.
+- APKs, Prototype-TM01 e zettelkasten-ai não tiveram primeiro commit confiavelmente retornado pela busca ordenada usada nesta passagem; não inferir antiguidade.
+
+## 12. Regra para a reciclagem
+
+Nenhum módulo será transplantado apenas porque parece útil.
+
+Cada candidato deverá receber:
+- origem;
+- commit de origem;
+- função original;
+- dependências;
+- dados que toca;
+- autoridade que assume;
+- testes existentes;
+- limitações históricas;
+- destino proposto;
+- adaptação necessária;
+- teste de regressão;
+- condição de rollback.
+
+Somente candidatos que passem essa ficha poderão entrar na arquitetura Fênix.
