@@ -1,0 +1,5 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { criarEstadoSemantico, verificarEstadoSemantico, projetarParaExecutor } from "./neuralese.mjs";
+test("representação semântica é portátil e verificável",()=>{const x=criarEstadoSemantico({intencao:"retomar tarefa",estado:"PAUSADA",evidencias:["e1"],restricoes:["sem segredo"],capacidades:["deterministico"],incertezas:["executor"],proposta:null,testes:["fixture"],rollback:"restaurar",parada:"sem autorização"});assert.equal(verificarEstadoSemantico(x),true);const y=projetarParaExecutor(x,{capacidadePermitida:["deterministico"],escopo:["ler"]});assert.equal(y.nao_autoriza,true);assert.deepEqual(y.capacidades_requeridas,["deterministico"]);});
+test("alteração semântica é detectada",()=>{const x=criarEstadoSemantico({intencao:"x",estado:"PENDENTE"});assert.throws(()=>verificarEstadoSemantico({...x,estado:"CONCLUIDA"}),/adulterado/);});
