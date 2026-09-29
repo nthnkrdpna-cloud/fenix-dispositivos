@@ -5,18 +5,21 @@ on:
     paths:
       - 'android/fenix-hub/**'
       - '.github/workflows/fenix-hub-android.yml'
+      - 'scripts/dispositivos/fenix-hub-android.test.mjs'
   workflow_dispatch:
   pull_request:
     paths:
       - 'android/fenix-hub/**'
       - '.github/workflows/fenix-hub-android.yml'
+      - 'scripts/dispositivos/fenix-hub-android.test.mjs'
 
 permissions:
   contents: read
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: android/fenix-hub
@@ -37,6 +40,11 @@ jobs:
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platforms;android-36" "build-tools;36.0.0"
 
+      - name: Gradle 9.4.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.4.1'
+
       - name: Static contract test
         run: node ../../../scripts/dispositivos/fenix-hub-android.test.mjs
 
@@ -45,9 +53,15 @@ jobs:
 
       - name: Verify APK
         run: |
-          test -s app/build/outputs/apk/debug/app-debug.apk
-          sha256sum app/build/outputs/apk/debug/app-debug.apk | tee app/build/outputs/apk/debug/SHA256SUMS.txt
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose app/build/outputs/apk/debug/app-debug.apk
+          apk="app/build/outputs/apk/debug/app-debug.apk"
+          test -s "$apk"
+          sha256sum "$apk" | tee app/build/outputs/apk/debug/SHA256SUMS.txt
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$apk"
+          "$ANDROID_HOME/build-tools/36.0.0/zipalign" -c -P 16 -v 4 "$apk"
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$apk" | tee app/build/outputs/apk/debug/APK_BADGING.txt
+          grep -F "package: name='com.nthnkrdpna.fenixhub.debug'" app/build/outputs/apk/debug/APK_BADGING.txt
+          grep -F "sdkVersion:'33'" app/build/outputs/apk/debug/APK_BADGING.txt
+          grep -F "targetSdkVersion:'36'" app/build/outputs/apk/debug/APK_BADGING.txt
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
@@ -56,4 +70,5 @@ jobs:
           path: |
             android/fenix-hub/app/build/outputs/apk/debug/app-debug.apk
             android/fenix-hub/app/build/outputs/apk/debug/SHA256SUMS.txt
+            android/fenix-hub/app/build/outputs/apk/debug/APK_BADGING.txt
           if-no-files-found: error

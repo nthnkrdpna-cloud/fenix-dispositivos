@@ -13,27 +13,36 @@ h1{font-size:24px;margin:0}.muted{color:#8d9aae;font-size:13px}
 .card{background:#111927;border:1px solid #253248;border-radius:14px;padding:15px}
 .card h2{font-size:16px;margin:0 0 8px}.state{font-family:monospace;font-size:12px;white-space:pre-wrap;color:#b7c5d9}
 button{width:100%;padding:11px 12px;margin-top:8px;border:1px solid #30415b;border-radius:10px;background:#172236;color:#eef5ff;font-weight:600}
-button:active{transform:translateY(1px)}.danger{border-color:#6b3d45}
+button:active{transform:translateY(1px)}.danger{border-color:#6b3d45}.note{font-size:12px;color:#a9b5c7;margin-top:8px}
 #log{margin-top:14px}.ok{color:#8bd3a8}
 </style>
 </head>
 <body>
-<header><div><h1>Fênix Hub</h1><div class="muted">Nó local · G75 · offline-first</div></div><button style="width:auto" onclick="refresh()">Atualizar</button></header>
+<header><div><h1>Fênix Hub</h1><div class="muted">Nó local · G75 · offline-first · sem root</div></div><button style="width:auto" onclick="refresh()">Atualizar</button></header>
 <div class="grid">
 <section class="card"><h2>Nó local</h2><div id="device" class="state">lendo…</div><button onclick="Fenix.openTermux()">Abrir Termux</button><button onclick="Fenix.settings('battery')">Revisar bateria/otimização</button></section>
+<section class="card"><h2>Auditoria Android</h2><div class="state">Leitura local e seletiva de automação.<br>Não contorna sandbox nem exige root.</div><button onclick="audit()">Auditar workflows / automação</button><button onclick="Fenix.settings('accessibility')">Abrir acessibilidade</button><button onclick="Fenix.settings('usage')">Abrir acesso de uso</button><div class="note">O Android filtra visibilidade de pacotes; o Hub declara somente apps de automação conhecidos.</div></section>
 <section class="card"><h2>Continuum</h2><div class="state">Fonte local: workspace Fênix<br>Autoridade: humana<br>Provedor: substituível</div><button onclick="run('node scripts/fenix.mjs status')">Consultar estado local</button><button onclick="run('node scripts/fenix.mjs fleet discover')">Descobrir frota</button></section>
 <section class="card"><h2>Frota</h2><div class="state">G15 · G75 · Redmi<br>Descobrir antes de otimizar<br>Rollback obrigatório</div><button onclick="run('node scripts/fenix.mjs fleet discover')">Discover — 3 nós</button><button onclick="run('node scripts/fenix.mjs fleet optimize')">Otimizar — comando único</button><button class="danger" onclick="run('node scripts/fenix.mjs fleet rollback')">Rollback</button></section>
 <section class="card"><h2>Rede</h2><div class="state">ARRIS TG1692A<br>CBN AP5541 #1<br>CBN AP5541 #2<br>Somente descoberta nesta fase</div><button onclick="run('node scripts/fenix.mjs network discover')">Descobrir LAN</button><button onclick="Fenix.settings('wireless')">Abrir configurações Wi‑Fi</button></section>
 <section class="card"><h2>Legado / Vault</h2><div class="state">Metadata-only<br>Não coleta valores de segredo<br>Hashes + candidatos + origem</div><button onclick="run('node scripts/fenix.mjs vault harvest .')">Catalogar workspace</button></section>
 <section class="card"><h2>Provedores</h2><div class="state">Quota gate local<br>Failover sem transferir autoridade<br>Credenciais ficam fora do diário</div><button onclick="run('node scripts/fenix.mjs quota status')">Consultar quota</button></section>
-<section class="card"><h2>Build</h2><div class="state">APK API 36<br>Java 17 · AGP 9.2.1<br>Sem dependência de biblioteca UI externa</div><button onclick="Fenix.openUrl('https://github.com/nthnkrdpna-cloud/hub')">Abrir Hub</button></section>
+<section class="card"><h2>Build</h2><div class="state">APK API 36<br>Java 17 · AGP 9.2.1<br>Gradle 9.4.1 · verificação apksigner/zipalign</div><button onclick="Fenix.openUrl('https://github.com/nthnkrdpna-cloud/hub')">Abrir Hub</button></section>
 </div>
-<section id="log" class="card"><h2>Operação</h2><div id="output" class="state">Pronto. Nenhuma ação física foi executada pelo APK.</div></section>
+<section id="log" class="card"><h2>Operação</h2><div id="output" class="state">Pronto. Ações de auditoria são somente leitura; mudanças físicas continuam separadas do APK.</div></section>
 <script>
 function refresh(){document.querySelector('#device').textContent=Fenix.device();}
 function run(cmd){
  document.querySelector('#output').textContent='Enviando ao Termux: '+cmd;
  Fenix.termuxCommand(cmd);
+}
+function audit(){
+ try{
+   const data=JSON.parse(Fenix.auditAutomation());
+   document.querySelector('#output').textContent=JSON.stringify(data,null,2);
+ }catch(e){
+   document.querySelector('#output').textContent='Falha ao renderizar auditoria: '+e;
+ }
 }
 refresh();
 </script>

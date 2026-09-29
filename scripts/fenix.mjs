@@ -16,6 +16,9 @@ function run(file, args) {
 const [domain = "help", action = "help", ...args] = process.argv.slice(2);
 
 const routes = {
+  status: {
+    check: ["scripts/continuidade/cli.mjs", [".", "saude"]]
+  },
   fleet: {
     discover: ["scripts/dispositivos/frota-android.mjs", ["discover", ...args]],
     optimize: ["scripts/dispositivos/frota-android.mjs", ["optimize", ...args]],
@@ -33,5 +36,5 @@ if (routes[domain]?.[action]) {
 } else if (domain === "quota" && action === "status") {
   await run("scripts/continuidade/quota-gate.mjs", ["status", ...args]);
 } else {
-  console.log("Fênix CLI: fenix fleet discover|optimize|rollback | fenix network discover | fenix vault harvest | fenix quota status");
+  console.log("Fênix CLI: fenix status | fenix fleet discover|optimize|rollback | fenix network discover | fenix vault harvest | fenix quota status");
 }
