@@ -1,0 +1,25 @@
+name: fenix-continuum
+on:
+  pull_request:
+    paths:
+      - "scripts/continuidade/**"
+      - "scripts/dispositivos/**"
+      - "scripts/rede/**"
+      - "docs/FENIX_*"
+      - ".github/workflows/fenix-continuum.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: testes Continuum e dispositivos
+        run: node --test scripts/continuidade/*.test.mjs scripts/dispositivos/frota-android.test.mjs
