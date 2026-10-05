@@ -22,7 +22,7 @@ test("ponte Termux mantém allowlist fechada", async () => {
 });
 
 test("status do Hub aponta para diagnóstico local somente leitura", async () => {
-  const fenix = await readFile(new URL("../../../scripts/fenix.mjs", import.meta.url), "utf8");
+  const fenix = await readFile(new URL("../../scripts/fenix.mjs", import.meta.url), "utf8");
   assert.match(fenix, /status:\s*\{\s*check:/);
   assert.match(fenix, /scripts\/continuidade\/cli\.mjs/);
   assert.match(fenix, /\["\.",\s*"saude"\]/);
@@ -50,7 +50,7 @@ test("Manifest evita backup e cleartext e limita queries", async () => {
 });
 
 test("frota exige exatamente os três perfis antes de otimizar", async () => {
-  const s = await readFile(new URL("../../../scripts/dispositivos/frota-android.mjs", import.meta.url), "utf8");
+  const s = await readFile(new URL("../../scripts/dispositivos/frota-android.mjs", import.meta.url), "utf8");
   assert.match(s, /fenix-android-fleet\/2/);
   assert.match(s, /exactly_three_authorized_nodes/);
   assert.match(s, /FLEET_INCOMPLETE/);
@@ -59,21 +59,21 @@ test("frota exige exatamente os três perfis antes de otimizar", async () => {
 });
 
 test("diagnóstico e snapshot precedem qualquer alteração", async () => {
-  const s = await readFile(new URL("../../../scripts/dispositivos/frota-android.mjs", import.meta.url), "utf8");
+  const s = await readFile(new URL("../../scripts/dispositivos/frota-android.mjs", import.meta.url), "utf8");
   assert.match(s, /const beforeNodes=.*snapshot/);
   assert.match(s, /applyCommon/);
   assert.match(s, /rolled_back/);
 });
 
 test("build portátil não depende de secrets de aplicação e mantém versões fixadas", async () => {
-  const script = await readFile(new URL("../../../scripts/dispositivos/build-fenix-hub-portable.sh", import.meta.url), "utf8");
+  const script = await readFile(new URL("../../scripts/dispositivos/build-fenix-hub-portable.sh", import.meta.url), "utf8");
   assert.match(script, /GRADLE_VERSION=.*9\.4\.1/);
   assert.match(script, /ANDROID_API=.*36/);
   assert.match(script, /BUILD_TOOLS=.*36\.0\.0/);
   assert.match(script, /JAVA_VERSION=.*17/);
   assert.match(script, /FENIX_ANDROID_CMDLINE_URL/);
   assert.match(script, /fenix-hub-build-state\.mjs/);
-  const neuralese = await readFile(new URL("../../../scripts/continuidade/neuralese.mjs", import.meta.url), "utf8");
+  const neuralese = await readFile(new URL("../../scripts/continuidade/neuralese.mjs", import.meta.url), "utf8");
   assert.match(neuralese, /NEURALESE_VERSAO/);
   assert.match(script, /apksigner/);
   assert.match(script, /zipalign.*-P 16/);

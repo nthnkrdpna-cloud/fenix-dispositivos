@@ -1,0 +1,61 @@
+# hub (nthnkrdpna-cloud/hub) → fenix-dispositivos: commit de origem → commit aqui
+# gerado por git filter-repo em 05/10/2026 a partir de hub@71a83c3545c08380d387335b0f971f150e24a889
+00822b3dafadaa14f5206942f80bd454981f38d2 9dd02ab90a688b1f96e99b5bb13db6c5ffab7a7b 2026-09-29 ci(android): validar APK também em pull request
+022813ae6f7674c78fa14aaa742fe3d00d7155bf 5e8fc03736d48131e58138ebb877d862ee86ead6 2026-09-29 ci(fenix): isolar validação determinística do Continuum
+0ea439da99e415232142b3b75ae990cfdac1f9aa 3c8e3238599b56e75caf344f1b440b75efa15a07 2026-09-29 test: require Neuralese continuity contract in APK build
+10d2ba979fed799b2b4f2687b888418152dfab74 6436083439b4b1f220871991e1c96280b9e6a2f3 2026-09-29 feat: Fênix Hub — build portátil independente do Actions
+1254fb58c55b8efb5a1abf66de419d177dbe23ac 9b61e6e18362fc919f1914bb12ad72099c6eca81 2026-09-29 feat(frota): formalizar contrato de capacidade dos nós
+12c50c9c3c2397b6e58237474decc040f5deddbd b7d59e9477ba4f6ee1b6065e50e15849e36a3a55 2026-09-29 Fênix: finalizar recovery bundle e contrato de capacidade
+1b66b384ab243150084c6461849015b6d168a3f8 fcf18d3070c844a3a14c6ef90522f450d7ad47f5 2026-09-29 feat(android): criar console offline do Fênix Hub
+1ff51806cdbecaa58dc23203033ae600bb2da4ec 5c50e950b63314ceaddaa2be8eb13b3e89caae0c 2026-09-29 ci(android): testar contrato antes do build
+21158875247d9b694e4addf4327428e5af85f033 bc9d543d394888e81f7532bfa6b726025c4f10e0 2026-09-29 feat(android): implementar ponte local do Fênix Hub
+304ece53155dd107f203d93ea86507b80c06b423 ced09bbe55031d688b8ca23120bcbae21fa3d985 2026-09-29 feat(android): adicionar tema mínimo do Hub
+36df66ad87681233a85ea17e095978a1a9708053 4bc1d0a3581aa61048f493925b5436d5c7c69225 2026-09-29 rebase: scripts/rede/auditoria-lan.mjs
+37b0c415298e271c8d04eb45a49b6ee65542a2cc 20d0e3248e9e692ad9b52347ac4a4fe9631d8517 2026-09-29 ci(android): adicionar build verificável do Fênix Hub
+3816c06a1f9fedf9fe8cd2baa3f2685d9aaed363 80c19eb707b962d660c868e8b0014cfa55344a0c 2026-09-29 rebase: scripts/continuidade/neuralese.mjs
+3e79fdf3bb52b70183a728e82e4b555216b6ebe3 32b84cc3c603da39456a36e63538610d468548d8 2026-09-29 rebase(continuum): portar docs/FENIX_ARQUITETURA_SOBREVIVENCIA.md sobre main atual
+3ee7ed0cf78c2b516d3ecb67c11892eaf7ea0be6 8db09962d0cdf8cc645435c1cdcc2b5eaa4ec459 2026-09-29 rebase: scripts/dispositivos/g15-diagnostico.mjs
+409e942ef6d4f8a5ed268410f07dbf2b95c77da4 f81d34f1bb79b6e0ce1c8d4707649b06181bc63c 2026-09-29 test(frota): validar contrato dos três nós
+45f5e7a812f15d8a2d50d2af8b3e8d1a14ba97c2 52c00f0f56c85c7e070d509d3d0575e61f91d360 2026-09-29 rebase(continuum): portar docs/FENIX_AUDITORIA_REDE_LOCAL.md sobre main atual
+4bcbb06ad89fbe671c126bc85ecaec8618ce4271 fff4ea63aa64ad4fcd5b9151487d28bf8b62624f 2026-09-29 ci(fenix): adicionar validação determinística pós-merge
+54d8c21c1e9d1efa42963bcb995179dfcb5bccba 06979ef2cdebecc14e17057263a96f708d280f97 2026-09-29 Merge pull request #79 from nthnkrdpna-cloud/feat/fenix-hub-android-g75
+57c9fc057d848fcad3508912865572809f93f0c6 ebea1b92af266c25aed81eb83eb578e3b7f37006 2026-09-29 docs(fenix): catalogar legado dos oito repositórios antes da reciclagem
+5984f5a76e7eb6f0e61defbfdaeb629803a03ffe e2b85ecd71eeaff86261a8b13c2cb44555c631e3 2026-09-29 Merge pull request #74 from nthnkrdpna-cloud/feat/continuum-zero-provider-survival-rebased
+5a37069ecd39b4539dc2e0ced4fcf7a024dcd108 3f496546390b33a5736216030d02b7420629e258 2026-09-29 fix(android): restringir ponte Termux ao contrato Fênix
+5de4ded760319620566531f6811b08be960e01a6 43fef4a00466f4ce7838a8837a6de38a148ca0c7 2026-09-29 docs: document pinned Android CLI bootstrap for portable build
+5eedb011d472cfae9aa21d3a63077ad6d591d90e 40fb19b40967c7f8d0a640931639a221e68c6ac3 2026-09-29 build: pin official Android CLI bootstrap for portable APK build
+6afc8f1919ed93f0c9d5dead1269b9e6a27c53e6 d8e485248b4184308fa1344b607d129e5bc8bcf2 2026-09-29 docs: document Neuralese continuity sidecar for APK builds
+6c67a793001a6b50bad1ca929dd010d32411add8 71623c0f85eedb6c014df0121398dcf44fb94f99 2026-09-29 docs(fenix): mapear ativos reutilizaveis antes da reciclagem
+6ebb8616e428a5cf18a50aa93dea3e7ea0b15c6e 950e99fae7423ddecb7d1bee378f22a955ce81a6 2026-09-29 feat(android): adicionar manifest seguro e ponte Termux opcional
+702d814f77eedd5e0ec4f8e30f5e3f89445034fa f80e5663d240ce619553b950e8c637a65b8c8606 2026-09-29 rebase: scripts/dispositivos/diagnostico-android.mjs
+7528c425a5bf6b21058b4da5e917c5bc74808faa 64e6113d928c82d27a0986f613655d6dece2fc7c 2026-09-29 rebase: scripts/dispositivos/frota-android.mjs
+80e5a33044afc56b7592d9fefebf75d19236082e 7f628f2eb78b288adf6371667211b0a26d192419 2026-09-29 ci: trigger APK builds on portable build changes and preserve Neuralese envelope
+8cf2cc90e81fbd3b12b98330861f8080828ad509 2a8fe4b45b96c6950921bde8ef8d4e1dc328e913 2026-09-29 ci: use pinned Ubuntu runner and portable APK bootstrap
+8f483742d3120acf08b61106f193e503120241f7 e59983ca4c76561d3e2e9b2ab4a8026b04ae94e2 2026-09-29 test(android): validar contrato do Fênix Hub
+900794bdcf4a496e5240ca72d10f6761430eee62 92587a42fd3afe2e1ce42b647d019d5a5260f9fd 2026-09-29 Merge pull request #76 from nthnkrdpna-cloud/feat/fenix-termux-orchestrator
+95be644c99bf3cad9060a4960925bddbe6b90672 e4448259770460f4affa077229fd91fffb122a9f 2026-09-29 test(termux): proteger bootstrap local
+9a6271a2cd1fac34cd5d78f33e2ffa81a0c2e082 0f5edf11a42244f7d27aa9659219f37bc9f10305 2026-09-29 feat(frota): endurecer discover e otimização dos três nós
+9e936cd6c636a891a1e79171ea9b2db617ffc15d cca1014a7180999870c0664c4827246028b23f67 2026-09-29 feat: endurecer Fênix Hub Android e gate de release
+b1872132beaa1a2991eff3ad0d72b7d12bb86da4 6ecc826fdafdf77dd1ea754bc7c7ebda838dbeea 2026-09-29 docs(fenix): registrar cobertura historica dos repositorios
+b5142462c532896080a90287e1fd76c4f7a6f68e 54812d1ca2e76b2d2564b0a66782c7c63aac914e 2026-09-29 build(android): configurar Fênix Hub API 36
+b6e3c9d2e1aa30613e69a377be112983b90812e8 56f80f822740bc395fb55ad66f437375d0dc591d 2026-09-29 build: emit Neuralese continuity envelope with APK artifact
+bb687b42e7785879f45155bc1261babf799a6643 a79d3e8d50d6f8061135679687e914655e473ccf 2026-09-29 rebase(continuum): portar docs/FENIX_WORKSPACE_OFFLINE.md sobre main atual
+bc6351004b6e0c5feea1882d91e977bba326993f 7f7880cb629e30c585d53e061ba3475d7e074353 2026-09-29 Continuum: validar camada Neuralese
+c169e9080336cb61fbe56320983dae02b9a13f26 975b5272a8055a56207fb33e7dc3cbe1952255a5 2026-09-28 HANDOFF: Moto G15 como executor persistente 24/7 [skip ci]
+c5c24af3145e5cce66067a857f67ad52e8fbba08 b0ebc43b5cab2b8519192869988ef383309f7114 2026-09-29 feat(fenix): adicionar CLI de orquestração local
+c7b7c3442f370dde980328f91737947b197b6e78 d45c7b3b5bf1f8e4876aafc64703491736f8fde9 2026-09-29 chore: trigger autonomous Fenix Hub APK build
+cb458579fe2b85f0cab9b55bfbf47046f7e38300 378010ff5ebb08d4427912beaad0924e0d484c35 2026-09-29 docs: record Android runner blocker and portable build hardening
+d25c8f0ca5076551931f334bbf4004d565b054f8 8c997dd54d7b6d464b5db62b62cbdfd6d0d57d47 2026-09-29 ci: add minimal runner availability probe
+d2d245a1effdf511606cf9f99bb2bd15ea708eed e0888db842ef65809e51893d875d74ba90538402 2026-09-29 build(android): configurar build determinístico
+d3341799e5c4d9ce6aab471683af101e47ae7cef c7f42f27176213bc855aa3f5e1f0c93573aaa36a 2026-09-29 rebase(continuum): portar docs/FENIX_WORKSPACE_G15.md sobre main atual
+d7a00b76c987bf5f2bda8a68d9285507e49ab788 f9afc614221c7c00c9363f6dbb19a1e2abdbfac2 2026-09-29 build(android): fixar AGP 9.2.1
+e0e1e0320b6fce87d821ae962b1ebb29e859dac4 9fa2c5e0ed62126c5ffce60faf6c9d3f923c2a77 2026-09-29 build: emit portable Neuralese state envelope for APK builds
+e206dc6263cb152ea60e86271cbd5a905623e6e0 7c4c8d6f910f89b9fa770f6910bfa02a991a1c83 2026-09-29 feat(termux): adicionar bootstrap local reversível do workspace
+ec3888872de5eca2155d89061d9c7b27a91e64fe 44a2f9db6992a3229ff54820c312d507c2863391 2026-09-29 test(frota): validar contrato de capacidade
+f0d2f1ac114e8c385554f0a4a088f0f5d4f8fee9 5321f6866ab05a3f766bba9b47ec327a47677606 2026-09-29 docs(fenix): ampliar catalogo com branches, workflows e marcos
+f2935bceda3360d3424aaafd6dc33aff7a664f9d 0941b3d50bedd15cbf5217e1dd73f5a0d9bacca6 2026-09-29 Merge pull request #78 from nthnkrdpna-cloud/feat/fenix-catalogo-legado
+f34442a72252c98794cce2cf8d1259e5a8c7b58d 28caaa0ef12bdbff34d8aeb146ee84ba82cd18b4 2026-09-29 feat(android): iniciar Fênix Hub nativo para G75
+f3f40264c38b1bd4a77b30a7968664d325e10ad3 f27223188aa584e4a049e7d8026158e2c633a44c 2026-09-29 rebase: docs/handoffs/HANDOFF-MOTOG15-CODESPACE-WIFI-2026-09-29.md
+f9b1c74b7b95bbfc8093dbb0bbacc526f8549690 01fc7a212b5f250e0dfe93258c548001d51f3eee 2026-09-29 rebase: scripts/rede/estado-reversivel.mjs
+fbc63b3a7d4f43a8dfd81fc66cb962421a94ee28 2ef76d75a982d7379c1e4d8473dc2a3da83e011a 2026-09-29 rebase: scripts/dispositivos/frota-android.test.mjs
+fc1b50036ffd53031aa789b50fbbf97ce0c69f7e 24f630d20df7708651f7808686d47dca99e52c97 2026-09-29 docs: Fênix Hub — build por Workers Builds sem quota de Actions
