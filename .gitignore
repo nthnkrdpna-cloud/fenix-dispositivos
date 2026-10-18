@@ -1,0 +1,14 @@
+# build portátil do APK: JDK, Gradle e SDK baixados (scripts/dispositivos/build-fenix-hub-portable.sh)
+.fenix-build-cache/
+android/fenix-hub/.gradle/
+android/fenix-hub/app/build/
+android/fenix-hub/build/
+android/fenix-hub/local.properties
+
+# credenciais, nos mesmos padrões dos outros repositórios
+*.pem
+*.key
+*_API_KEY*
+*_TOKEN*
+.env
+.env.*
