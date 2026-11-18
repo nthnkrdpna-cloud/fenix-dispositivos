@@ -176,7 +176,7 @@ public class MainActivity extends Activity {
                 || command.equals("node scripts/fenix.mjs fleet optimize")
                 || command.equals("node scripts/fenix.mjs fleet rollback")
                 || command.equals("node scripts/fenix.mjs network discover")
-                || command.startsWith("node scripts/fenix.mjs vault harvest ")
+                || command.equals("node scripts/fenix.mjs vault harvest .")
                 || command.equals("node scripts/fenix.mjs quota status");
         }
 
