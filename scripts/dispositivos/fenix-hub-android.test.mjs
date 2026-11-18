@@ -19,6 +19,11 @@ test("ponte Termux mantém allowlist fechada", async () => {
     assert.match(java, new RegExp(command.replace(" ", "\\s+")));
   }
   assert.doesNotMatch(java, /command\.matches\(/);
+  // 18/11/2026: `startsWith("... vault harvest ")` deixava passar "... harvest .; outro-comando",
+  // e o comando roda em bash -lc. Na lista só cabe igualdade exata.
+  const lista = java.slice(java.indexOf("private boolean isAllowedCommand"), java.indexOf("private void toast"));
+  assert.doesNotMatch(lista, /startsWith|endsWith|contains|indexOf/);
+  assert.match(lista, /command\.equals\("node scripts\/fenix\.mjs vault harvest \."\)/);
 });
 
 test("status do Hub aponta para diagnóstico local somente leitura", async () => {
