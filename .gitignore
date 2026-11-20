@@ -15,3 +15,9 @@ android/fenix-hub/local.properties
 
 # evidências de rede: MAC, IP e nome de aparelho da casa não entram no git
 evidencias/
+
+# o APK do Prisma (TWA): saídas do Gradle
+android/prisma/.gradle/
+android/prisma/app/build/
+android/prisma/build/
+android/prisma/local.properties

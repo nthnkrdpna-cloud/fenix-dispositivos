@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- o cânone do hub (M22): noite -->
+    <color name="noite">#12131C</color>
+</resources>

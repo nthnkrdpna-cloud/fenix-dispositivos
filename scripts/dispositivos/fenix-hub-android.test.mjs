@@ -71,7 +71,10 @@ test("diagnóstico e snapshot precedem qualquer alteração", async () => {
 });
 
 test("build portátil não depende de secrets de aplicação e mantém versões fixadas", async () => {
-  const script = await readFile(new URL("../../scripts/dispositivos/build-fenix-hub-portable.sh", import.meta.url), "utf8");
+  // desde 20/11/2026 o preparo do ambiente mora em android-ambiente.sh, que o build carrega
+  const build = await readFile(new URL("../../scripts/dispositivos/build-fenix-hub-portable.sh", import.meta.url), "utf8");
+  assert.match(build, /source "\$ROOT\/scripts\/dispositivos\/android-ambiente\.sh"/);
+  const script = build + await readFile(new URL("../../scripts/dispositivos/android-ambiente.sh", import.meta.url), "utf8");
   assert.match(script, /GRADLE_VERSION=.*9\.4\.1/);
   assert.match(script, /ANDROID_API=.*36/);
   assert.match(script, /BUILD_TOOLS=.*36\.0\.0/);
