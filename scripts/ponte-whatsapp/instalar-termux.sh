@@ -92,5 +92,5 @@ if ((APPLY)); then
   "applied_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 }
 EOF
-  echo "ponte: READY ($ESTADO). Agora o código: no Prisma, WhatsApp → Ponte → o número → Pedir código."
+  echo "ponte: READY ($ESTADO). Agora o código: no Prisma, painel do WhatsApp → WhatsApp Web pelo servidor de bolso → o número → Pedir o código."
 fi

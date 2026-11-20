@@ -71,7 +71,8 @@ distribuída (pacote, APK), o conjunto segue a GPL-3.0.
 2. **A conta da ponte.**
    - No Supabase, em Authentication → Users → Add user, crie um usuário com e-mail próprio para ela
      (não o seu) e senha forte, já confirmado.
-   - No Prisma, em WhatsApp → Ponte → "Dar o papel de ponte", digite esse e-mail.
+   - No Prisma, no painel do WhatsApp, abra "Primeira vez: a conta da ponte", digite esse e-mail e
+     clique em "Dar o papel de ponte".
    - Essa conta não abre página nenhuma do site.
 3. **No G15 (Termux).**
    1. Se ainda não fez: `bash scripts/dispositivos/servidor-de-bolso.sh --apply`. Sem isso, a ponte
@@ -83,8 +84,8 @@ distribuída (pacote, APK), o conjunto segue a GPL-3.0.
       pública, o e-mail e a senha da conta da ponte.
    5. `bash scripts/ponte-whatsapp/instalar-termux.sh --apply` de novo liga o serviço.
 4. **O código.**
-   - No Prisma, em WhatsApp → Ponte, digite o número e clique em "Pedir código". Em segundos aparece
-     um código de 8 letras.
+   - No Prisma, no painel do WhatsApp, abra "WhatsApp Web pelo servidor de bolso", digite o número e
+     clique em "Pedir o código". Em segundos aparece um código de 8 letras.
    - No celular do número: WhatsApp → Aparelhos conectados → Conectar um aparelho → **Conectar com
      número de telefone** → digite o código.
 5. **Conferir.**
@@ -93,7 +94,7 @@ distribuída (pacote, APK), o conjunto segue a GPL-3.0.
 
 ## Desfazer
 
-- **O número:** Prisma → Ponte → Desconectar. Com a conexão aberta, a ponte sai do WhatsApp e o
+- **O número:** no Prisma, "Desconectar" ao lado dele. Com a conexão aberta, a ponte sai do WhatsApp e o
   aparelho some da lista do celular. Durante uma queda, ela desliga só do lado do G15, e o painel
   pede para conferir em "Aparelhos conectados".
 - **O serviço:** `bash scripts/ponte-whatsapp/instalar-termux.sh --remover --apply`. A sessão e a
