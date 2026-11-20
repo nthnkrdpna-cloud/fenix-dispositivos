@@ -12,3 +12,6 @@ android/fenix-hub/local.properties
 *_TOKEN*
 .env
 .env.*
+
+# evidências de rede: MAC, IP e nome de aparelho da casa não entram no git
+evidencias/

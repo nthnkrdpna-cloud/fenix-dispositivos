@@ -15,7 +15,8 @@ revisar. **Nada foi apagado:** o histórico continua no hub, e veio para cá jun
 |---|---|
 | `android/fenix-hub/` | app Android (API 36, Java 17, sem dependência de UI externa), console offline e ponte Termux com lista fechada de comandos |
 | `scripts/dispositivos/` | frota (`discover`, `optimize`, `rollback`), diagnóstico, contrato de capacidade, build portátil do APK, bootstrap do Termux |
-| `scripts/rede/` | auditoria da rede local e estado reversível (registro antes, retorno, evidência depois) |
+| `scripts/rede/` | auditoria da rede local, estado reversível (registro antes, retorno, evidência depois) e o vigia de quem está conectado (`vigia-lan.mjs`; contenção do TV Box em `docs/TVBOX_CONTENCAO.md`) |
+| `docs/SERVIDORES_DE_BOLSO.md` | celulares antigos como servidores: papéis da frota, `servidor-de-bolso.sh` no Termux do G15, rede, desbloqueio e o que a lei não deixa |
 | `scripts/fenix.mjs` | a CLI que o app chama (`node scripts/fenix.mjs …`) |
 | `scripts/continuidade/neuralese.mjs` | **cópia** do hub, usada pelo build do APK. A fonte é `hub/scripts/continuidade/neuralese.mjs` |
 | `docs/FENIX_*.md`, `docs/handoffs/` | arquitetura, build, gate de release, workspaces, handoffs do Moto G15 |
@@ -37,7 +38,7 @@ node scripts/fenix.mjs fleet discover        # roda aqui
 Sem dependência, `node --test` de fábrica:
 
 ```sh
-node --test scripts/*.test.mjs scripts/dispositivos/*.test.mjs scripts/continuidade/*.test.mjs
+node --test scripts/*.test.mjs scripts/dispositivos/*.test.mjs scripts/continuidade/*.test.mjs scripts/rede/*.test.mjs
 ```
 
 O build do APK (`scripts/dispositivos/build-fenix-hub-portable.sh`) baixa JDK, Gradle e o SDK do
