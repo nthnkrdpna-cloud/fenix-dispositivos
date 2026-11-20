@@ -23,4 +23,4 @@ Android, o Termux, a rede de casa. Saiu do `hub` em 05/10/2026. A história e o 
 5. **Continuidade é do hub.** `scripts/continuidade/neuralese.mjs` é cópia; mudança nele nasce no
    hub e é copiada para cá, nunca o contrário.
 6. **Nunca empurrar na `main`.** Sempre branch + PR, com portão local verde antes do push:
-   `node --test scripts/*.test.mjs scripts/dispositivos/*.test.mjs scripts/continuidade/*.test.mjs scripts/rede/*.test.mjs`.
+   `node --test scripts/*.test.mjs scripts/dispositivos/*.test.mjs scripts/continuidade/*.test.mjs scripts/rede/*.test.mjs scripts/ponte-whatsapp/*.test.mjs`.

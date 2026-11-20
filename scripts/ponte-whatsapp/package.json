@@ -1,0 +1,16 @@
+{
+  "name": "ponte-whatsapp",
+  "private": true,
+  "description": "A ponte do WhatsApp Web para o Prisma (M30 do hub): aparelho vinculado por código de pareamento, no servidor de bolso.",
+  "type": "module",
+  "main": "ponte.mjs",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node ponte.mjs",
+    "entrar": "node ponte.mjs --entrar",
+    "test": "node --test *.test.mjs"
+  },
+  "dependencies": {
+    "baileys": "7.0.0-rc14"
+  }
+}

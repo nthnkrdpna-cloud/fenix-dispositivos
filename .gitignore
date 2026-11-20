@@ -21,3 +21,6 @@ android/prisma/.gradle/
 android/prisma/app/build/
 android/prisma/build/
 android/prisma/local.properties
+
+# a ponte do WhatsApp Web: dependências baixadas pelo npm ci (o lock é que entra)
+scripts/ponte-whatsapp/node_modules/
