@@ -16,6 +16,7 @@ revisar. **Nada foi apagado:** o histórico continua no hub, e veio para cá jun
 | `android/fenix-hub/` | app Android (API 36, Java 17, sem dependência de UI externa), console offline e ponte Termux com lista fechada de comandos |
 | `scripts/dispositivos/` | frota (`discover`, `optimize`, `rollback`), diagnóstico, contrato de capacidade, build portátil do APK, bootstrap do Termux |
 | `scripts/rede/` | auditoria da rede local, estado reversível (registro antes, retorno, evidência depois) e o vigia de quem está conectado (`vigia-lan.mjs`; contenção do TV Box em `docs/TVBOX_CONTENCAO.md`) |
+| `docs/SERVIDORES_DE_BOLSO.md` | celulares antigos como servidores: papéis da frota, `servidor-de-bolso.sh` no Termux do G15, rede, desbloqueio e o que a lei não deixa |
 | `scripts/fenix.mjs` | a CLI que o app chama (`node scripts/fenix.mjs …`) |
 | `scripts/continuidade/neuralese.mjs` | **cópia** do hub, usada pelo build do APK. A fonte é `hub/scripts/continuidade/neuralese.mjs` |
 | `docs/FENIX_*.md`, `docs/handoffs/` | arquitetura, build, gate de release, workspaces, handoffs do Moto G15 |

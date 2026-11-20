@@ -84,7 +84,7 @@ async function applyCommon(serial){
   }
   return changed;
 }
-async function applyG75Termux(serial){
+async function applyTermuxIdle(serial){
   const present=(await shell(serial,["pm","list","packages","com.termux"])).includes("package:com.termux");
   if(!present) return [];
   const before=await shell(serial,["dumpsys","deviceidle","whitelist"]);
@@ -94,9 +94,29 @@ async function applyG75Termux(serial){
   if(!after.includes("com.termux")) throw new Error(`${serial}: Termux não entrou na whitelist do deviceidle`);
   return [{type:"deviceidle_whitelist",package:"com.termux",before:"not_whitelisted",after:"whitelisted"}];
 }
+// Servidor de bolso (docs/SERVIDORES_DE_BOLSO.md): no Android 12+ o "phantom process killer" mata
+// os serviços que o Termux sobe. Só no papel persistent_edge, só com Termux, e com volta registrada.
+const SERVIDOR_SETTINGS=[["global","settings_enable_monitor_phantom_procs","false"]];
+async function applyServidor(serial,sdk){
+  if(Number(sdk)<31) return [];
+  if(!(await shell(serial,["pm","list","packages","com.termux"])).includes("package:com.termux")) return [];
+  const changed=[];
+  for(const [scope,key,value] of SERVIDOR_SETTINGS){
+    const before=await setting(serial,scope,key);
+    if(before===value){ changed.push({type:"setting",scope,key,before,after:value}); continue; }
+    await run(["-s",serial,"shell","settings","put",scope,key,value]);
+    const after=await setting(serial,scope,key);
+    if(after!==value) throw new Error(`${serial}: alteração não confirmada em ${scope}.${key}`);
+    changed.push({type:"setting",scope,key,before,after});
+  }
+  return changed;
+}
 async function rollbackNode(node){
   for(const x of [...node.changes].reverse()){
-    if(x.type==="setting" && x.before!=="null" && x.before!=="unknown")
+    // "null" é o settings dizendo que a chave não existia: voltar é apagar, não gravar "null"
+    if(x.type==="setting" && x.before==="null" && x.before!==x.after)
+      await run(["-s",node.serial,"shell","settings","delete",x.scope,x.key]);
+    else if(x.type==="setting" && x.before!=="unknown" && x.before!==x.after)
       await run(["-s",node.serial,"shell","settings","put",x.scope,x.key,x.before]);
     if(x.type==="deviceidle_whitelist" && x.before==="not_whitelisted")
       await run(["-s",node.serial,"shell","dumpsys","deviceidle","whitelist","-com.termux"]).catch(()=>{});
@@ -136,7 +156,8 @@ for(const before of beforeNodes){
   const changes=[];
   try{
     changes.push(...await applyCommon(before.serial));
-    if(before.profile==="g75") changes.push(...await applyG75Termux(before.serial));
+    if(before.profile==="g75" || before.role==="persistent_edge") changes.push(...await applyTermuxIdle(before.serial));
+    if(before.role==="persistent_edge") changes.push(...await applyServidor(before.serial,before.sdk));
     nodes.push({...before,changes,ok:true});
   }catch(error){
     const partial={...before,changes,ok:false,error:error.message};
