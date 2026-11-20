@@ -13,6 +13,7 @@ revisar. **Nada foi apagado:** o histórico continua no hub, e veio para cá jun
 
 | Caminho | O que é |
 |---|---|
+| `android/prisma/` | o APK do Prisma (TWA): o próprio `nthnkr.com/prisma` como aplicativo, com o aviso do WhatsApp; build por `scripts/dispositivos/build-prisma-twa.sh` (`docs/PRISMA_APP.md`) |
 | `android/fenix-hub/` | app Android (API 36, Java 17, sem dependência de UI externa), console offline e ponte Termux com lista fechada de comandos |
 | `scripts/dispositivos/` | frota (`discover`, `optimize`, `rollback`), diagnóstico, contrato de capacidade, build portátil do APK, bootstrap do Termux |
 | `scripts/rede/` | auditoria da rede local, estado reversível (registro antes, retorno, evidência depois) e o vigia de quem está conectado (`vigia-lan.mjs`; contenção do TV Box em `docs/TVBOX_CONTENCAO.md`) |

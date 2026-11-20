@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appName">Prisma</string>
+    <string name="launchUrl">https://nthnkr.com/prisma</string>
+    <string name="webManifestUrl">https://nthnkr.com/prisma.webmanifest</string>
+    <!-- o site confirma o aplicativo em https://nthnkr.com/.well-known/assetlinks.json (hub, worker/assetlinks.js) -->
+    <string name="assetStatements" translatable="false">[{ \"relation\": [\"delegate_permission/common.handle_all_urls\"], \"target\": { \"namespace\": \"web\", \"site\": \"https://nthnkr.com\" } }]</string>
+</resources>

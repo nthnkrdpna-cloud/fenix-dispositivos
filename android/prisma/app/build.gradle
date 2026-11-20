@@ -1,0 +1,37 @@
+// O Prisma como aplicativo (M29 do hub): uma TWA — o próprio https://nthnkr.com/prisma aberto pelo
+// Chrome, sem barra de endereço. Nenhum código próprio: só a biblioteca oficial do Google para TWA.
+// A assinatura de produção acontece fora do Gradle (scripts/dispositivos/build-prisma-twa.sh), com a
+// chave do dono, pedida na hora: o build não lê segredo nenhum.
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.nthnkr.prisma'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.nthnkr.prisma'
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName '0.1.0'
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+        }
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.4'
+}
